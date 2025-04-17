@@ -1,0 +1,12 @@
+{
+    "name": "clase_soa",
+    "description": "descripcion de la clase del soa",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    }
+}
