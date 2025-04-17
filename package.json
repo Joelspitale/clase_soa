@@ -2,7 +2,9 @@
     "name": "clase_soa",
     "description": "descripcion de la clase del soa",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-node-mysql": "2.0.0"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flows.json",

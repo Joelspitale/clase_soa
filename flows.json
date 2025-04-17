@@ -32,7 +32,7 @@
         "y": 220,
         "wires": [
             [
-                "1c8485397db3069c"
+                "f360b36b027f1df8"
             ]
         ]
     },
@@ -49,8 +49,21 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
+        "x": 820,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "f360b36b027f1df8",
+        "type": "mysql",
+        "z": "ec8f93fd2ff47f8c",
+        "name": "",
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "1c8485397db3069c"
+            ]
+        ]
     }
 ]
