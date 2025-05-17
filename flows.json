@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "456ea5fa6f993060",
+        "type": "tab",
+        "label": "API REST (Personas)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "b882d7adde1a4a77",
         "type": "subflow",
         "name": "Subflow 1",
@@ -284,6 +292,91 @@
         "y": 1099,
         "w": 612,
         "h": 82
+    },
+    {
+        "id": "b5f2d03d8b0719d3",
+        "type": "group",
+        "z": "456ea5fa6f993060",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "24eeb9361eac4f42",
+            "49428ac7b1192251",
+            "2bef35edd304a067",
+            "b39ceee7d610e314"
+        ],
+        "x": 34,
+        "y": 59,
+        "w": 792,
+        "h": 82
+    },
+    {
+        "id": "59bcb85fba067270",
+        "type": "group",
+        "z": "456ea5fa6f993060",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "6a545c329f4f5b8c",
+            "779d5549bc4bf2ec",
+            "46f8b09307a6b56e",
+            "fac544e37454db4e",
+            "a0167518d143590c",
+            "ef352f42b8b66399",
+            "55594d5ef5895cee",
+            "22623535867c7e50"
+        ],
+        "x": 54,
+        "y": 359,
+        "w": 1192,
+        "h": 162
+    },
+    {
+        "id": "baa71be2ab523283",
+        "type": "group",
+        "z": "456ea5fa6f993060",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "186cd3f280b85307",
+            "e37c5cfdf15e81fb",
+            "d3ac25ccf781150d",
+            "d827ea5995e81955",
+            "0dfd79e183d0d2e1",
+            "120535785dfd4bbb",
+            "bef2778dc002c167",
+            "6936bc9f8907525b",
+            "7a065713d3302f92",
+            "e914df2396eb44e6",
+            "34c535c089000ed4",
+            "ecaea061c5480336",
+            "e83c7d761889ddee"
+        ],
+        "x": 54,
+        "y": 619,
+        "w": 1572,
+        "h": 282
     },
     {
         "id": "cb1f627278cda536",
@@ -2621,7 +2714,7 @@
         "type": "debug",
         "z": "bc0aae29d28958a3",
         "name": "debug 27",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3680,6 +3773,585 @@
         "info": "",
         "x": 450,
         "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "24eeb9361eac4f42",
+        "type": "http in",
+        "z": "456ea5fa6f993060",
+        "g": "b5f2d03d8b0719d3",
+        "name": "",
+        "url": "/api/v1/personas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "b39ceee7d610e314"
+            ]
+        ]
+    },
+    {
+        "id": "49428ac7b1192251",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "b5f2d03d8b0719d3",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 750,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2bef35edd304a067",
+        "type": "mysql",
+        "z": "456ea5fa6f993060",
+        "g": "b5f2d03d8b0719d3",
+        "mydb": "fa02be60edcd9580",
+        "name": "Listar Personas",
+        "x": 580,
+        "y": 100,
+        "wires": [
+            [
+                "49428ac7b1192251"
+            ]
+        ]
+    },
+    {
+        "id": "b39ceee7d610e314",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "g": "b5f2d03d8b0719d3",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT * FROM prueba.personas order by nombre;",
+        "output": "str",
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "2bef35edd304a067"
+            ]
+        ]
+    },
+    {
+        "id": "6a545c329f4f5b8c",
+        "type": "http in",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "url": "/api/v1/personas/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 440,
+        "wires": [
+            [
+                "fac544e37454db4e"
+            ]
+        ]
+    },
+    {
+        "id": "779d5549bc4bf2ec",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1150,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "46f8b09307a6b56e",
+        "type": "mysql",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "mydb": "fa02be60edcd9580",
+        "name": "get",
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [
+                "ef352f42b8b66399"
+            ]
+        ]
+    },
+    {
+        "id": "fac544e37454db4e",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SELECT * FROM prueba.personas where id = {{req.params.id}};",
+        "output": "str",
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "46f8b09307a6b56e"
+            ]
+        ]
+    },
+    {
+        "id": "a0167518d143590c",
+        "type": "change",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 400,
+        "wires": [
+            [
+                "779d5549bc4bf2ec"
+            ]
+        ]
+    },
+    {
+        "id": "ef352f42b8b66399",
+        "type": "switch",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 440,
+        "wires": [
+            [
+                "a0167518d143590c"
+            ],
+            [
+                "22623535867c7e50"
+            ]
+        ]
+    },
+    {
+        "id": "55594d5ef5895cee",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "not found",
+        "statusCode": "404",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1160,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "22623535867c7e50",
+        "type": "change",
+        "z": "456ea5fa6f993060",
+        "g": "59bcb85fba067270",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 480,
+        "wires": [
+            [
+                "55594d5ef5895cee"
+            ]
+        ]
+    },
+    {
+        "id": "3112697d2a015646",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "Get all Personas",
+        "info": "",
+        "x": 520,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "65a5cf5e3797fc34",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "Get one Persona",
+        "info": "",
+        "x": 560,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "186cd3f280b85307",
+        "type": "http in",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "url": "/api/v1/personas",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 760,
+        "wires": [
+            [
+                "e37c5cfdf15e81fb"
+            ]
+        ]
+    },
+    {
+        "id": "e37c5cfdf15e81fb",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "insert into prueba.personas (nombre, numer0) values ( '{{payload.nombre}}', {{payload.numero}} );",
+        "output": "str",
+        "x": 440,
+        "y": 760,
+        "wires": [
+            [
+                "d3ac25ccf781150d",
+                "0dfd79e183d0d2e1"
+            ]
+        ]
+    },
+    {
+        "id": "d3ac25ccf781150d",
+        "type": "mysql",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "mydb": "fa02be60edcd9580",
+        "name": "Insert Personas",
+        "x": 660,
+        "y": 760,
+        "wires": [
+            [
+                "bef2778dc002c167"
+            ]
+        ]
+    },
+    {
+        "id": "d827ea5995e81955",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "statusCode": "201",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1520,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "b28426f4b253715a",
+        "type": "catch",
+        "z": "456ea5fa6f993060",
+        "name": "",
+        "scope": [
+            "2bef35edd304a067",
+            "46f8b09307a6b56e",
+            "d3ac25ccf781150d",
+            "6749a850cbc54b50"
+        ],
+        "uncaught": false,
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "cf072d5132c5c6de"
+            ]
+        ]
+    },
+    {
+        "id": "35e60ec34410889c",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "name": "Error 500",
+        "statusCode": "500",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 920,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "cf072d5132c5c6de",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\"error\": \"{{error.message}}\" }",
+        "output": "str",
+        "x": 780,
+        "y": 220,
+        "wires": [
+            [
+                "35e60ec34410889c"
+            ]
+        ]
+    },
+    {
+        "id": "6749a850cbc54b50",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "Captura ERRORES  MySql",
+        "info": "Se capturan todos los errores de todos los mysql",
+        "x": 810,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0dfd79e183d0d2e1",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "debug 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "120535785dfd4bbb",
+        "type": "change",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.location",
+                "pt": "msg",
+                "to": "msg.concatenado",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1280,
+        "y": 760,
+        "wires": [
+            [
+                "d827ea5995e81955",
+                "e914df2396eb44e6"
+            ]
+        ]
+    },
+    {
+        "id": "bef2778dc002c167",
+        "type": "json",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 830,
+        "y": 660,
+        "wires": [
+            [
+                "6936bc9f8907525b"
+            ]
+        ]
+    },
+    {
+        "id": "6936bc9f8907525b",
+        "type": "json",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 970,
+        "y": 660,
+        "wires": [
+            [
+                "7a065713d3302f92",
+                "34c535c089000ed4"
+            ]
+        ]
+    },
+    {
+        "id": "7a065713d3302f92",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.insertId",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "e914df2396eb44e6",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "headers.location",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "e83c7d761889ddee",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "Falta",
+        "info": "falta agregar para que me devuelva el codigo autoincremental que me genero creo al insertar la persona",
+        "x": 350,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "34c535c089000ed4",
+        "type": "function",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "function 8",
+        "func": "msg.concatenado = \"/api/v1/personas/\";\nmsg.concatenado = msg.concatenado.concat(msg.payload.insertId);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 760,
+        "wires": [
+            [
+                "120535785dfd4bbb",
+                "ecaea061c5480336"
+            ]
+        ]
+    },
+    {
+        "id": "ecaea061c5480336",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "concatenado",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "7c0fa87ce1e03b8b",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "Post",
+        "info": "",
+        "x": 590,
+        "y": 580,
         "wires": []
     }
 ]
