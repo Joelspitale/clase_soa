@@ -371,12 +371,67 @@
             "e914df2396eb44e6",
             "34c535c089000ed4",
             "ecaea061c5480336",
-            "e83c7d761889ddee"
+            "e83c7d761889ddee",
+            "461034fbc7b7e1ca"
         ],
         "x": 54,
         "y": 619,
         "w": 1572,
         "h": 282
+    },
+    {
+        "id": "d0fca2e673f73f0d",
+        "type": "group",
+        "z": "456ea5fa6f993060",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "c0645af03d564cbe",
+            "dc181eb653228b83",
+            "27d632c9326eb957",
+            "d8ef1c39073f7735",
+            "e0841a7793cec02a",
+            "6e712afd8530f549",
+            "1c3e150dc139515d",
+            "e39b29a6a1065463",
+            "bed0b562ba5c4398",
+            "d0901ff1f32b177f"
+        ],
+        "x": 74,
+        "y": 939,
+        "w": 1572,
+        "h": 162
+    },
+    {
+        "id": "e6d534d6f7565fb1",
+        "type": "group",
+        "z": "456ea5fa6f993060",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "76935cea295e04fc",
+            "dfdfa21c5779b9d1",
+            "3a9ee5960d70bfb7",
+            "042b3da8101c0b71"
+        ],
+        "x": 136.00692749023438,
+        "y": 1277.34716796875,
+        "w": 642,
+        "h": 203.65283203125
     },
     {
         "id": "cb1f627278cda536",
@@ -4108,7 +4163,9 @@
             "2bef35edd304a067",
             "46f8b09307a6b56e",
             "d3ac25ccf781150d",
-            "6749a850cbc54b50"
+            "6749a850cbc54b50",
+            "dc181eb653228b83",
+            "dfdfa21c5779b9d1"
         ],
         "uncaught": false,
         "x": 630,
@@ -4253,7 +4310,8 @@
         "wires": [
             [
                 "7a065713d3302f92",
-                "34c535c089000ed4"
+                "34c535c089000ed4",
+                "461034fbc7b7e1ca"
             ]
         ]
     },
@@ -4352,6 +4410,318 @@
         "info": "",
         "x": 590,
         "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d0901ff1f32b177f",
+        "type": "http in",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "url": "/api/v1/personas",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 1020,
+        "wires": [
+            [
+                "c0645af03d564cbe"
+            ]
+        ]
+    },
+    {
+        "id": "c0645af03d564cbe",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "update prueba.personas  set nombre = '{{payload.nombre}}',   numer0 = {{payload.numero}} where id = '{{payload.id}}';",
+        "output": "str",
+        "x": 460,
+        "y": 1020,
+        "wires": [
+            [
+                "dc181eb653228b83"
+            ]
+        ]
+    },
+    {
+        "id": "dc181eb653228b83",
+        "type": "mysql",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "mydb": "fa02be60edcd9580",
+        "name": "update Personas",
+        "x": 670,
+        "y": 1020,
+        "wires": [
+            [
+                "27d632c9326eb957"
+            ]
+        ]
+    },
+    {
+        "id": "27d632c9326eb957",
+        "type": "json",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 890,
+        "y": 1020,
+        "wires": [
+            [
+                "d8ef1c39073f7735"
+            ]
+        ]
+    },
+    {
+        "id": "d8ef1c39073f7735",
+        "type": "json",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1030,
+        "y": 1020,
+        "wires": [
+            [
+                "e0841a7793cec02a"
+            ]
+        ]
+    },
+    {
+        "id": "e0841a7793cec02a",
+        "type": "switch",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "property": "payload.affectedRows",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1190,
+        "y": 1020,
+        "wires": [
+            [
+                "e39b29a6a1065463"
+            ],
+            [
+                "6e712afd8530f549"
+            ]
+        ]
+    },
+    {
+        "id": "461034fbc7b7e1ca",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "baa71be2ab523283",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "6e712afd8530f549",
+        "type": "change",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1380,
+        "y": 1060,
+        "wires": [
+            [
+                "1c3e150dc139515d"
+            ]
+        ]
+    },
+    {
+        "id": "1c3e150dc139515d",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "not found",
+        "statusCode": "404",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1560,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "e39b29a6a1065463",
+        "type": "change",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1380,
+        "y": 980,
+        "wires": [
+            [
+                "bed0b562ba5c4398"
+            ]
+        ]
+    },
+    {
+        "id": "bed0b562ba5c4398",
+        "type": "http response",
+        "z": "456ea5fa6f993060",
+        "g": "d0fca2e673f73f0d",
+        "name": "ok",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1550,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "571e366155a1aec5",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "PUT",
+        "info": "",
+        "x": 650,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "76935cea295e04fc",
+        "type": "template",
+        "z": "456ea5fa6f993060",
+        "g": "e6d534d6f7565fb1",
+        "name": "",
+        "field": "topic",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "delete from prueba.personas where id = {{req.params.id}};",
+        "output": "str",
+        "x": 500,
+        "y": 1320,
+        "wires": [
+            [
+                "dfdfa21c5779b9d1",
+                "042b3da8101c0b71"
+            ]
+        ]
+    },
+    {
+        "id": "dfdfa21c5779b9d1",
+        "type": "mysql",
+        "z": "456ea5fa6f993060",
+        "g": "e6d534d6f7565fb1",
+        "mydb": "fa02be60edcd9580",
+        "name": "DELETE",
+        "x": 692.0069274902344,
+        "y": 1318.34716796875,
+        "wires": [
+            [
+                "27d632c9326eb957"
+            ]
+        ]
+    },
+    {
+        "id": "3a9ee5960d70bfb7",
+        "type": "http in",
+        "z": "456ea5fa6f993060",
+        "g": "e6d534d6f7565fb1",
+        "name": "",
+        "url": "/api/v1/personas/:id",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 282.0069274902344,
+        "y": 1318.34716796875,
+        "wires": [
+            [
+                "76935cea295e04fc"
+            ]
+        ]
+    },
+    {
+        "id": "4a8496e9f159b2ee",
+        "type": "comment",
+        "z": "456ea5fa6f993060",
+        "name": "DELETE",
+        "info": "",
+        "x": 540,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "042b3da8101c0b71",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "g": "e6d534d6f7565fb1",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 1440,
         "wires": []
     }
 ]
