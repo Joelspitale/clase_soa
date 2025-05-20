@@ -40,6 +40,14 @@
         "env": []
     },
     {
+        "id": "26db0f9e526bce9e",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "b882d7adde1a4a77",
         "type": "subflow",
         "name": "Subflow 1",
@@ -504,6 +512,109 @@
         "willMsg": {},
         "userProps": "",
         "sessionExpiry": ""
+    },
+    {
+        "id": "ec868fdb656f8204",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "2126b01416d6c6dd",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "e57fcf836daff2c1",
+        "type": "ui-page",
+        "name": "Page 1",
+        "ui": "ec868fdb656f8204",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "2126b01416d6c6dd",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "6c2c39b054b6812c",
+        "type": "ui-group",
+        "name": "Formulario",
+        "page": "e57fcf836daff2c1",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "112310a2d070fdb4",
+        "type": "ui-group",
+        "name": "Group 2",
+        "page": "e57fcf836daff2c1",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
     },
     {
         "id": "e948e37d14c750e7",
@@ -4114,7 +4225,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "insert into prueba.personas (nombre, numer0) values ( '{{payload.nombre}}', {{payload.numero}} );",
+        "template": "insert into prueba.personas (nombre, numer0) values ( '{{payload.nombre}}', {{payload.numer0}} );",
         "output": "str",
         "x": 440,
         "y": 760,
@@ -4723,5 +4834,502 @@
         "x": 550,
         "y": 1440,
         "wires": []
+    },
+    {
+        "id": "868c562b29660b65",
+        "type": "ui-text",
+        "z": "26db0f9e526bce9e",
+        "group": "6c2c39b054b6812c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 510,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e64b27a02aa1defa",
+        "type": "ui-button",
+        "z": "26db0f9e526bce9e",
+        "group": "112310a2d070fdb4",
+        "name": "",
+        "label": "Refrescar",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "payload",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "f98529714e499d4d"
+            ]
+        ]
+    },
+    {
+        "id": "9af33b1d72c3073b",
+        "type": "inject",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "868c562b29660b65"
+            ]
+        ]
+    },
+    {
+        "id": "a8ebb492e751b4b9",
+        "type": "inject",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 200,
+        "y": 340,
+        "wires": [
+            [
+                "e64b27a02aa1defa"
+            ]
+        ]
+    },
+    {
+        "id": "0a3a69818ccb8cba",
+        "type": "ui-table",
+        "z": "26db0f9e526bce9e",
+        "group": "112310a2d070fdb4",
+        "name": "",
+        "label": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": false,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [
+            {
+                "title": "ID",
+                "key": "id",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Nombre",
+                "key": "nombre",
+                "keyType": "key",
+                "type": "text",
+                "width": "",
+                "align": "start"
+            },
+            {
+                "title": "Numero",
+                "key": "numer0",
+                "keyType": "key",
+                "type": "progress",
+                "width": "",
+                "align": "start"
+            }
+        ],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "x": 910,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f98529714e499d4d",
+        "type": "http request",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://soa.vm2.mooo.com/nodered/api/v1/personas",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 340,
+        "wires": [
+            [
+                "0a3a69818ccb8cba"
+            ]
+        ]
+    },
+    {
+        "id": "2c90aab88bf6b536",
+        "type": "inject",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "f98529714e499d4d"
+            ]
+        ]
+    },
+    {
+        "id": "cbd9466728155c43",
+        "type": "ui-form",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "group": "6c2c39b054b6812c",
+        "label": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Nombre",
+                "key": "nombre",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "numer0",
+                "key": "numer0",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "nombre": "",
+            "numer0": ""
+        },
+        "payload": "",
+        "submit": "Guardar",
+        "cancel": "Cancelar",
+        "resetOnSubmit": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "passthru": false,
+        "dropdownOptions": [],
+        "x": 190,
+        "y": 480,
+        "wires": [
+            [
+                "7965a6052e2dc8d9",
+                "2d773e0faf6c12cf"
+            ]
+        ]
+    },
+    {
+        "id": "7965a6052e2dc8d9",
+        "type": "debug",
+        "z": "26db0f9e526bce9e",
+        "name": "debug 34",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "2d773e0faf6c12cf",
+        "type": "http request",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://soa.vm2.mooo.com/nodered/api/v1/personas",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "51d352fb574355fd"
+            ]
+        ]
+    },
+    {
+        "id": "51d352fb574355fd",
+        "type": "switch",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "201",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 480,
+        "wires": [
+            [
+                "f98529714e499d4d"
+            ]
+        ]
+    },
+    {
+        "id": "3de3dfeadab9e87d",
+        "type": "comment",
+        "z": "26db0f9e526bce9e",
+        "name": "Refrecar Tabla",
+        "info": "despues de confirmar que se inserto el json con el status code 201 refresco la tabla",
+        "x": 780,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "f5a61603980eab22",
+        "type": "ui-number-input",
+        "z": "26db0f9e526bce9e",
+        "group": "6c2c39b054b6812c",
+        "name": "",
+        "label": "number",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "tooltip": "",
+        "passthru": true,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "spinner": "default",
+        "x": 180,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7d1e5f0da6d411e",
+        "type": "ui-text-input",
+        "z": "26db0f9e526bce9e",
+        "group": "6c2c39b054b6812c",
+        "name": "",
+        "label": "text",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "mode": "text",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": true,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 170,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14e2de890ff657a8",
+        "type": "ui-button-group",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "group": "6c2c39b054b6812c",
+        "order": 0,
+        "width": 6,
+        "height": 1,
+        "label": "button group",
+        "className": "",
+        "rounded": true,
+        "useThemeColors": true,
+        "passthru": false,
+        "options": [
+            {
+                "label": "A",
+                "icon": "home",
+                "value": "1",
+                "valueType": "str",
+                "color": "#009933"
+            },
+            {
+                "label": "B",
+                "icon": "gear",
+                "value": "2",
+                "valueType": "str",
+                "color": "#999999"
+            }
+        ],
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 530,
+        "y": 720,
+        "wires": [
+            [
+                "36aaaa1fe5fb3071"
+            ]
+        ]
+    },
+    {
+        "id": "36aaaa1fe5fb3071",
+        "type": "debug",
+        "z": "26db0f9e526bce9e",
+        "name": "debug 35",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "73a951f31741f6bf",
+        "type": "inject",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 310,
+        "y": 840,
+        "wires": [
+            [
+                "39141dbb2488e9e2"
+            ]
+        ]
+    },
+    {
+        "id": "39141dbb2488e9e2",
+        "type": "template",
+        "z": "26db0f9e526bce9e",
+        "name": "",
+        "field": "options",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[\n{\"Label\": \"A\", \"Icon\": \"home\", \"Value\" : 1},\n{\"Label\": \"B\", \"Icon\": \"testing\", \"Value\" : 3},\n{\"Label\": \"C\", \"Icon\": \"arabic\", \"Value\" : 2}\n]",
+        "output": "str",
+        "x": 360,
+        "y": 760,
+        "wires": [
+            [
+                "14e2de890ff657a8"
+            ]
+        ]
     }
 ]
