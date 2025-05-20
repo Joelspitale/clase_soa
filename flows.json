@@ -4551,13 +4551,14 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "update prueba.personas  set nombre = '{{payload.nombre}}',   numer0 = {{payload.numero}} where id = '{{payload.id}}';",
+        "template": "update prueba.personas  set nombre = '{{payload.nombre}}',   numer0 = {{payload.numer0}} where id = '{{payload.id}}';",
         "output": "str",
         "x": 460,
         "y": 1020,
         "wires": [
             [
-                "dc181eb653228b83"
+                "dc181eb653228b83",
+                "e1d54fcba376a6b4"
             ]
         ]
     },
@@ -4836,6 +4837,22 @@
         "wires": []
     },
     {
+        "id": "e1d54fcba376a6b4",
+        "type": "debug",
+        "z": "456ea5fa6f993060",
+        "name": "debug 36",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 1160,
+        "wires": []
+    },
+    {
         "id": "868c562b29660b65",
         "type": "ui-text",
         "z": "26db0f9e526bce9e",
@@ -5005,7 +5022,7 @@
         "method": "GET",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://soa.vm2.mooo.com/nodered/api/v1/personas",
+        "url": "https://soa.vm2.mooo.com/api/v1/personas",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -5119,7 +5136,7 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "https://soa.vm2.mooo.com/nodered/api/v1/personas",
+        "url": "https://soa.vm2.mooo.com/api/v1/personas",
         "tls": "",
         "persist": false,
         "proxy": "",
