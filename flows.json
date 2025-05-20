@@ -48,6 +48,14 @@
         "env": []
     },
     {
+        "id": "188fccfb7d1f880e",
+        "type": "tab",
+        "label": "Acceso a Backend",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "b882d7adde1a4a77",
         "type": "subflow",
         "name": "Subflow 1",
@@ -127,6 +135,69 @@
                 },
                 {
                     "id": "56741c5826a9d0e9",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "6e8e5e1dbac6c44f",
+        "type": "subflow",
+        "name": "Token ok",
+        "info": "Inputs:\nmsg.urlBase\nmsg.username\nmsg.password\n\n\nSe da prioridad a los valores de la UI",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "06716cbbe71a43d5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 200,
+                "wires": []
+            },
+            {
+                "x": 660,
+                "y": 300,
+                "wires": []
+            }
+        ],
+        "env": [
+            {
+                "name": "urlBase",
+                "type": "str",
+                "value": "algo"
+            },
+            {
+                "name": "username",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "password",
+                "type": "str",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99",
+        "outputLabels": [
+            "Token ok",
+            "No Autorizado"
+        ],
+        "status": {
+            "x": 800,
+            "y": 120,
+            "wires": [
+                {
+                    "id": "3eedcc8c7da23db8",
                     "port": 0
                 }
             ]
@@ -225,9 +296,9 @@
             "abee03a8c23e8d35",
             "b31469f034e2fb0b"
         ],
-        "x": 134,
+        "x": 124,
         "y": 579,
-        "w": 672,
+        "w": 682,
         "h": 82
     },
     {
@@ -752,6 +823,109 @@
         "info": "",
         "x": 220,
         "y": 400,
+        "wires": []
+    },
+    {
+        "id": "06716cbbe71a43d5",
+        "type": "function",
+        "z": "6e8e5e1dbac6c44f",
+        "name": "Control de Sintaxis",
+        "func": "let urlBase = msg.urlBaseE;\nlet username = msg.usernameE;\nlet password = msg.passwordE;\n\n// Si no están definidos o están vacíos, usar los alternativos\nif (!urlBase || urlBase.length === 0) {\n    urlBase = msg.urlBase;\n}\nif (!username || username.length === 0) {\n    username = msg.username;\n}\nif (!password || password.length === 0) {\n    password = msg.password;\n}\n\n// Validar que todos existan\nif (!urlBase) {\n    msg.message = \"Falta variable urlBase\";\n    return [null, msg];\n}\nif (!username) {\n    msg.message = \"Falta variable username\";\n    return [null, msg];\n}\nif (!password) {\n    msg.message = \"Falta variable password\";\n    return [null, msg];\n}\n\n// Agregar '/' al final si no lo tiene\nif (!urlBase.endsWith('/')) {\n    urlBase += '/';\n}\n\nmsg.urlBase = urlBase;\nmsg.username = username;\nmsg.password = password;\nmsg.message = `URL Final: ${urlBase}`;\nreturn [msg, null];\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "3eedcc8c7da23db8"
+            ],
+            [
+                "3eedcc8c7da23db8"
+            ]
+        ],
+        "outputLabels": [
+            "Ok",
+            "Err"
+        ]
+    },
+    {
+        "id": "c652fa412da9129e",
+        "type": "change",
+        "z": "6e8e5e1dbac6c44f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "urlBaseE",
+                "pt": "msg",
+                "to": "urlBase",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "usernameE",
+                "pt": "msg",
+                "to": "username",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "passwordE",
+                "pt": "msg",
+                "to": "password",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 135,
+        "y": 220,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "3eedcc8c7da23db8",
+        "type": "change",
+        "z": "6e8e5e1dbac6c44f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "message",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 595,
+        "y": 120,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "5e9764249dd62135",
+        "type": "comment",
+        "z": "6e8e5e1dbac6c44f",
+        "name": "Uso",
+        "info": "Utilizo el nodo change para conocer el estato del subflujo y lo imprimo en estado, el payload muere aca, no me sobreescribe el payload del flujo",
+        "x": 670,
+        "y": 60,
         "wires": []
     },
     {
@@ -2913,7 +3087,7 @@
         "type": "function",
         "z": "6acd73ba8a72fee5",
         "name": "Default File",
-        "func": "msg.payload={\n    \"utc0ffset\":\"-03:00\"\n};\nreturn msg;",
+        "func": "msg.payload={\n    \"utc0ffset\":\"-03:00\",\n    \"backend\": {\n        \"urlBase\":\"https://soa.vm1.mooo.com:443\",\n        \"username\":\"admin\",\n        \"password\":\"admin123\"\n\n    }\n};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3967,7 +4141,8 @@
         "name": "",
         "statusCode": "",
         "headers": {
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "x-host": "1"
         },
         "x": 750,
         "y": 100,
@@ -4857,7 +5032,7 @@
         "type": "ui-text",
         "z": "26db0f9e526bce9e",
         "group": "6c2c39b054b6812c",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "name": "",
@@ -5070,7 +5245,7 @@
         "name": "",
         "group": "6c2c39b054b6812c",
         "label": "",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "options": [
@@ -5194,7 +5369,7 @@
         "group": "6c2c39b054b6812c",
         "name": "",
         "label": "number",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "topic": "topic",
@@ -5225,7 +5400,7 @@
         "group": "6c2c39b054b6812c",
         "name": "",
         "label": "text",
-        "order": 1,
+        "order": 2,
         "width": 0,
         "height": 0,
         "topic": "topic",
@@ -5255,7 +5430,7 @@
         "z": "26db0f9e526bce9e",
         "name": "",
         "group": "6c2c39b054b6812c",
-        "order": 0,
+        "order": 1,
         "width": 6,
         "height": 1,
         "label": "button group",
@@ -5346,6 +5521,75 @@
         "wires": [
             [
                 "14e2de890ff657a8"
+            ]
+        ]
+    },
+    {
+        "id": "4617775994ad4cbe",
+        "type": "subflow:6e8e5e1dbac6c44f",
+        "z": "188fccfb7d1f880e",
+        "name": "Backend Auth",
+        "env": [
+            {
+                "name": "urlBase",
+                "value": "http://algo",
+                "type": "str"
+            },
+            {
+                "name": "username",
+                "value": "admin",
+                "type": "str"
+            },
+            {
+                "name": "password",
+                "value": "admin123",
+                "type": "str"
+            }
+        ],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e1b5dcf67e493cde",
+        "type": "inject",
+        "z": "188fccfb7d1f880e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "urlBase",
+                "v": "config.backend.urlBase",
+                "vt": "global"
+            },
+            {
+                "p": "password",
+                "v": "config.backend.password",
+                "vt": "global"
+            },
+            {
+                "p": "username",
+                "v": "config.backend.username",
+                "vt": "global"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "4617775994ad4cbe"
             ]
         ]
     }
